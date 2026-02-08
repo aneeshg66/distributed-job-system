@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: djs-postgres
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  manager:
+    build: ./manager
+    container_name: djs-manager
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./react-frontend
+    container_name: djs-frontend
+    depends_on:
+      - manager
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:
