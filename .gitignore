@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.cursor/
+venv/
+__pycache__/
+*.pyc
+react-frontend/node_modules/
+react-frontend/dist/
+*.log
